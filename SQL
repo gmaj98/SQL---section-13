@@ -169,3 +169,30 @@ FROM
     papers ON students.id = papers.student_id
 GROUP BY first_name
 ORDER BY average DESC;
+
+SELECT 
+    title AS unreviewed_series
+FROM
+    series
+        LEFT JOIN
+    reviews ON series.id = reviews.series_id
+WHERE
+    rating IS NULL;
+ 
+ 
+SELECT 
+    title AS unreviewed_series
+FROM
+    reviews
+        RIGHT JOIN
+    series ON series.id = reviews.series_id
+WHERE
+    rating IS NULL;
+    
+ SELECT 
+    genre, ROUND(AVG(rating), 2) AS avg_rating
+FROM
+    series
+        JOIN
+    reviews ON series.id = reviews.series_id
+GROUP BY genre;
